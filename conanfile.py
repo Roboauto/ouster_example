@@ -27,10 +27,11 @@ class OusterSDKConan(ConanFile):
         "build_viz": False,
         "build_pcap": False,
         "build_osf": False,
-        "shared": False,
+        "shared": True,
         "fPIC": True,
-        "ensure_cpp17": False,
+        "ensure_cpp17": True,
         "eigen_max_align_bytes": False,
+        "libcurl:with_ssl": False,
     }
 
     generators = "cmake_paths", "cmake_find_package"
@@ -69,7 +70,7 @@ class OusterSDKConan(ConanFile):
         self.requires("jsoncpp/1.9.5")
         self.requires("spdlog/1.11.0")
         self.requires("fmt/9.1.0")
-        self.requires("libcurl/7.84.0")
+        self.requires("libcurl/7.84.0", options={"with_ssl": False})
 
         if self.options.build_pcap:
             self.requires("libtins/4.3")
